@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 import ResponsiveAppBar from "../components/ResponsiveAppBar";
 import { useAppSelector } from "../store/hooks";
 
-const Saque: React.FC = () => {
+const Deposit: React.FC = () => {
   const transactionRedux = useAppSelector(
     (state) => state.transaction
   );
