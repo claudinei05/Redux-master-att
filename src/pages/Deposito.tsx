@@ -21,6 +21,7 @@ const Saque: React.FC = () => {
   const navigate = useNavigate();
 
   function cashOut() {
+    
     navigate("/");
   }
 
