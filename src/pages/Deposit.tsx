@@ -15,13 +15,10 @@ import ResponsiveAppBar from "../components/ResponsiveAppBar";
 import { useAppSelector } from "../store/hooks";
 
 const Deposit: React.FC = () => {
-  const transactionRedux = useAppSelector(
-    (state) => state.transaction
-  );
+  // const transactionRedux = useAppSelector((state) => state.transaction);
   const navigate = useNavigate();
 
   function cashOut() {
-    
     navigate("/");
   }
 
@@ -48,14 +45,7 @@ const Deposit: React.FC = () => {
             }}
           />
 
-          <Grid
-            item
-            xs={12}
-            sm={8}
-            md={5}
-            component={Paper}
-            elevation={6}
-          >
+          <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6}>
             <Box
               sx={{
                 my: 8,
@@ -74,12 +64,9 @@ const Deposit: React.FC = () => {
               >
                 Deposite seu dinheiro
               </Typography>
-              <Typography
-                component="div"
-                variant="h6"
-              >
+              <Typography component="div" variant="h6">
                 Seu Saldo é de: R$
-                {transactionRedux.balance}
+                {/* {transactionRedux.balance} */}
               </Typography>
               <Card
                 sx={{
@@ -115,4 +102,4 @@ const Deposit: React.FC = () => {
   );
 };
 
-export default Saque;
+export default Deposit;

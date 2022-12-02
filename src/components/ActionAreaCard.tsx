@@ -1,7 +1,4 @@
-import {
-  CardActionArea,
-  Grid,
-} from "@mui/material";
+import { CardActionArea, Grid } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -9,9 +6,7 @@ import Typography from "@mui/material/Typography";
 import { useAppSelector } from "../store/hooks";
 
 export default function ActionAreaCard() {
-  const transactionRedux = useAppSelector(
-    (state) => state.transaction
-  );
+  const balanceRedux = useAppSelector((state) => state.balance);
 
   return (
     <Card
@@ -34,26 +29,13 @@ export default function ActionAreaCard() {
             PHOTO
           </Avatar>
           <CardContent>
-            <Typography
-              gutterBottom
-              variant="h5"
-              component="div"
-            ></Typography>
-            <Typography
-              fontSize="13px"
-              variant="body2"
-              color="text.secondary"
-            >
-              Olá {},Seja bem vindo ao Basic
-              Wallet:)
+            <Typography gutterBottom variant="h5" component="div"></Typography>
+            <Typography fontSize="13px" variant="body2" color="text.secondary">
+              Olá {},Seja bem vindo ao Basic Wallet:)
             </Typography>
-            <Typography
-              variant="h6"
-              align="center"
-              mt={2}
-            >
+            <Typography variant="h6" align="center" mt={2}>
               Saldo em conta R$
-              {transactionRedux.balance}
+              {balanceRedux.balance}
             </Typography>
           </CardContent>
         </CardActionArea>

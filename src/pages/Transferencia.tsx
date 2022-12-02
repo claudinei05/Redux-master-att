@@ -11,39 +11,34 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import ResponsiveAppBar from "../components/ResponsiveAppBar";
-import {
-  useAppSelector,
-  useAppDispatch,
-} from "../store/hooks";
-import Operations from "../types/types";
-import {
-  subValue,
-  doWithdraw,
-} from "../store/modules/TransactionSlice";
+import { useAppSelector, useAppDispatch } from "../store/hooks";
+import Operations from "../types/OperationsType";
+import { subBalance } from "../store/modules/BalanceSlice";
 import { useNavigate } from "react-router-dom";
+import { addOperation } from "../store/modules/OperationSlice";
+import OperationType from "../types/OperationsType";
 
 const Transfer: React.FC = () => {
-  const transactionRedux = useAppSelector(
-    (state) => state.transaction
-  );
+  const operationRedux = useAppSelector((state) => state.operation);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [value, setValue] = useState<number>(0);
-  const [description, setDescription] =
-    useState<string>("");
-  const [account, setAccount] =
-    useState<number>(0);
+  const [description, setDescription] = useState<string>("");
+  const [account, setAccount] = useState<number>(0);
   const [digit, setDigit] = useState<number>(0);
 
   const handleTransfer = () => {
-    const operation: Operations = {
+    const id = Date.now();
+    const operation = {
+      id,
       value,
+      type: "W",
       description,
       account,
       digit,
     };
-    dispatch(doWithdraw(operation));
-    dispatch(subValue(operation.value));
+    dispatch(addOperation(operation));
+    dispatch(subBalance(value));
     navigate("/");
   };
 
@@ -71,14 +66,7 @@ const Transfer: React.FC = () => {
             }}
           />
 
-          <Grid
-            item
-            xs={12}
-            sm={8}
-            md={5}
-            component={Paper}
-            elevation={6}
-          >
+          <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6}>
             <Box
               sx={{
                 my: 8,
@@ -87,11 +75,7 @@ const Transfer: React.FC = () => {
                 alignItems: "center",
               }}
             >
-              <Box
-                component="form"
-                noValidate
-                sx={{ mt: 1 }}
-              >
+              <Box component="form" noValidate sx={{ mt: 1 }}>
                 <TextField
                   sx={{
                     m: 1,
@@ -104,11 +88,7 @@ const Transfer: React.FC = () => {
                   label="Número da conta"
                   name="Número da conta"
                   autoFocus
-                  onChange={(ev) =>
-                    setAccount(
-                      Number(ev.target.value)
-                    )
-                  }
+                  onChange={(ev) => setAccount(Number(ev.target.value))}
                 />
                 <TextField
                   sx={{ m: 1, width: "10ch" }}
@@ -117,11 +97,7 @@ const Transfer: React.FC = () => {
                   fullWidth
                   label="digito"
                   name="digito"
-                  onChange={(ev) =>
-                    setDigit(
-                      Number(ev.target.value)
-                    )
-                  }
+                  onChange={(ev) => setDigit(Number(ev.target.value))}
                 />
                 <TextField
                   margin="normal"
@@ -130,11 +106,7 @@ const Transfer: React.FC = () => {
                   name="Valor da transferência"
                   label="Valor da transferência"
                   type="number"
-                  onChange={(ev) =>
-                    setValue(
-                      Number(ev.target.value)
-                    )
-                  }
+                  onChange={(ev) => setValue(Number(ev.target.value))}
                 />
                 <TextField
                   margin="normal"
@@ -143,19 +115,10 @@ const Transfer: React.FC = () => {
                   name="Descrição"
                   label="Descrição"
                   type="Text"
-                  onChange={(ev) =>
-                    setDescription(
-                      ev.target.value
-                    )
-                  }
+                  onChange={(ev) => setDescription(ev.target.value)}
                 />
                 <FormControlLabel
-                  control={
-                    <Checkbox
-                      value="remember"
-                      color="primary"
-                    />
-                  }
+                  control={<Checkbox value="remember" color="primary" />}
                   label="Lembrar na proxima transferencia"
                 />
                 <Button

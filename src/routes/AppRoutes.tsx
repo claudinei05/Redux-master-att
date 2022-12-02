@@ -1,12 +1,9 @@
 import React from "react";
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Extrato from "../pages/Extrato";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
-import Deposito from "../pages/Deposito";
+import Deposit from "../pages/Deposit";
 import Transferencia from "../pages/Transferencia";
 
 const router = createBrowserRouter([
@@ -24,7 +21,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/Saque",
-    element: <Deposito />,
+    element: <Deposit />,
   },
   {
     path: "/Login",

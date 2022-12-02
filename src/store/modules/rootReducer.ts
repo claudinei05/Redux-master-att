@@ -1,9 +1,11 @@
 import { combineReducers } from "@reduxjs/toolkit";
 
 import login from "./LoginSlice";
-import transaction from "./TransactionSlice";
+import balance from "./BalanceSlice";
+import operation from "./OperationSlice";
 
 export default combineReducers({
+  balance,
+  operation,
   login,
-  transaction,
 });

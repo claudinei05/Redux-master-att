@@ -1,22 +1,11 @@
-import {
-  CardActionArea,
-  CardMedia,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { CardActionArea, CardMedia, Grid, Typography } from "@mui/material";
 import Card from "@mui/material/Card";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ActionAreaCard from "../components/ActionAreaCard";
 import ResponsiveAppBar from "../components/ResponsiveAppBar";
-import {
-  useAppDispatch,
-  useAppSelector,
-} from "../store/hooks";
-import {
-  addValue,
-  subValue,
-} from "../store/modules/TransactionSlice";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { addBalance, subBalance } from "../store/modules/BalanceSlice";
 // eslint-disable-next-line no-lone-blocks
 {
   /*
@@ -30,9 +19,7 @@ import {
 }
 
 const Home: React.FC = () => {
-  const transactionRedux = useAppSelector(
-    (state) => state.transaction
-  );
+  const balanceRedux = useAppSelector((state) => state.balance);
   const dispach = useAppDispatch();
   const navigate = useNavigate();
 
@@ -50,11 +37,11 @@ const Home: React.FC = () => {
   const [valor, setValor] = useState<String>("");
 
   const handleSubBalace = () => {
-    dispach(subValue(Number(valor)));
+    dispach(subBalance(Number(valor)));
   };
 
   const handleAddBalace = () => {
-    dispach(addValue(Number(valor)));
+    dispach(addBalance(Number(valor)));
   };
 
   return (
@@ -75,10 +62,7 @@ const Home: React.FC = () => {
             flexDirection: "column",
           }}
         >
-          <Grid
-            container
-            sx={{ opacity: 0.5, columns: 4 }}
-          >
+          <Grid container sx={{ opacity: 0.5, columns: 4 }}>
             <Grid>
               <Card
                 sx={{
@@ -100,10 +84,7 @@ const Home: React.FC = () => {
                   />
                 </CardActionArea>
               </Card>
-              <Typography
-                variant="h5"
-                align="center"
-              >
+              <Typography variant="h5" align="center">
                 transferencias
               </Typography>
             </Grid>
@@ -127,10 +108,7 @@ const Home: React.FC = () => {
                   />
                 </CardActionArea>
               </Card>
-              <Typography
-                variant="h5"
-                align="center"
-              >
+              <Typography variant="h5" align="center">
                 pagamentos
               </Typography>
             </Grid>
@@ -155,10 +133,7 @@ const Home: React.FC = () => {
                     />
                   </CardActionArea>
                 </Card>
-                <Typography
-                  variant="h5"
-                  align="center"
-                >
+                <Typography variant="h5" align="center">
                   Extrato
                 </Typography>
               </Grid>
@@ -183,30 +158,11 @@ const Home: React.FC = () => {
                   />
                 </CardActionArea>
               </Card>
-              <Typography
-                variant="h5"
-                align="center"
-              >
+              <Typography variant="h5" align="center">
                 depósito
               </Typography>
             </Grid>
           </Grid>
-          {/* <Grid>
-            <input
-              type="number"
-              step={10}
-              onChange={(ev) => {
-                setValor(ev.target.value);
-              }}
-            />
-
-            <button onClick={handleAddBalace}>
-              ADD
-            </button>
-            <button onClick={handleSubBalace}>
-              SUB
-            </button>
-          </Grid> */}
         </Grid>
       </Grid>
     </React.Fragment>

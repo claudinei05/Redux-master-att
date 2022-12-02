@@ -16,9 +16,7 @@ import ResponsiveAppBar from "../components/ResponsiveAppBar";
 import { useAppSelector } from "../store/hooks";
 
 const Extrato: React.FC = () => {
-  const transactionRedux = useAppSelector(
-    (state) => state.transaction
-  );
+  // const transactionRedux = useAppSelector((state) => state.transaction);
   const navigate = useNavigate();
 
   function goBack() {
@@ -51,14 +49,7 @@ const Extrato: React.FC = () => {
             }}
           />
 
-          <Grid
-            item
-            xs={12}
-            sm={8}
-            md={5}
-            component={Paper}
-            elevation={6}
-          >
+          <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6}>
             <Box
               sx={{
                 my: 8,
@@ -67,17 +58,11 @@ const Extrato: React.FC = () => {
                 alignItems: "center",
               }}
             >
-              <Typography
-                component="div"
-                variant="h6"
-              >
+              <Typography component="div" variant="h6">
                 Saldo em conta
               </Typography>
-              <Typography
-                component="div"
-                variant="h3"
-              >
-                R${transactionRedux.balance}
+              <Typography component="div" variant="h3">
+                {/* R${transactionRedux.balance} */}
               </Typography>
               <Card
                 sx={{
@@ -93,30 +78,31 @@ const Extrato: React.FC = () => {
                 </CardActionArea>
               </Card>
               <Grid>
-                <Paper
-                  elevation={2}
-                  sx={{ padding: "5px" }}
-                >
+                <Paper elevation={2} sx={{ padding: "5px" }}>
                   {" "}
                   SAÍDAS
-                  {transactionRedux.withdraw.map(
+                  {/* {transactionRedux.withdraw.map(
                     (item) => {
                       return (
+                        if type = 'w'
+
                         <div>
+                        <h1> SAIDAS
                           R${item.value}{" "}
                           {item.description}{" "}
                           {item.account}-
                           {item.digit}
                         </div>
+
+                        else if type = 'D'
+
+                        <h1> Entradas
                       );
                     }
-                  )}
+                  )} */}
                 </Paper>
               </Grid>
-              <Typography
-                component="div"
-                sx={{ color: "blue", margin: 4 }}
-              >
+              <Typography component="div" sx={{ color: "blue", margin: 4 }}>
                 Saldo adicionado ao abrir conta
               </Typography>
               <Typography
